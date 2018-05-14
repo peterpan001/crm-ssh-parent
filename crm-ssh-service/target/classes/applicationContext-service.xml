@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"       
+	xmlns:p="http://www.springframework.org/schema/p"  
+	xmlns:context="http://www.springframework.org/schema/context"   
+	xmlns:tx="http://www.springframework.org/schema/tx"  
+	xmlns:aop="http://www.springframework.org/schema/aop"  
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+	http://www.springframework.org/schema/beans/spring-beans.xsd    
+	http://www.springframework.org/schema/aop    
+	http://www.springframework.org/schema/aop/spring-aop.xsd    
+	http://www.springframework.org/schema/tx    
+	http://www.springframework.org/schema/tx/spring-tx.xsd    
+	http://www.springframework.org/schema/context    
+	http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	
+	<!-- userService -->
+	<bean id="userService" class="com.crm_ssh_service.service.UserServiceImpl">
+		<property name="userDao" ref="userDao"/>
+	</bean>
+	
+	<!-- customerService -->
+	<bean id="customerService" class="com.crm_ssh_service.service.CustomerServiceImpl">
+		<property name="customerDao" ref="customerDao"/>
+	</bean>
+	
+	<!-- DictService -->
+	<bean id="dictService" class="com.crm_ssh_service.service.DictServiceImpl">
+		<property name="dictDao" ref="dictDao"/>
+	</bean>
+	
+	<!-- linkmanService -->
+	<bean id="linkmanService" class="com.crm_ssh_service.service.LinkmanServiceImpl">
+		<property name="linkmanDao" ref="linkmanDao"/>
+		<property name="customerDao" ref="customerDao"/>
+	</bean>
+	
+	<!-- 注解扫描拜访客户和统计模块 -->
+	<context:component-scan base-package="com.crm_ssh_service.service"/>
+	<!-- visitService -->
+	<!-- 
+	<bean id="visitService" class="com.crm_ssh_service.service.VisitServiceImpl">
+		<property name="visitDao" ref="visitDao"/>
+		<property name="customerDao" ref="customerDao"/>
+	</bean>
+	-->
+	
+	<!-- TotalsService -->
+	<!-- 
+	<bean id="totalsService" class="com.crm_ssh_service.service.TotalsServiceImpl">
+		<property name="totalsDao" ref="totalsDao"/>
+	</bean> 
+	-->
+</beans>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 设置文件上传总大小  struts.multipart.maxSize=2097152-->
+	<constant name="struts.multipart.maxSize" value="20971520"/>
+	
+	<package name="crm_ssh" namespace="/" extends="struts-default">	
+		<interceptors>
+			<interceptor name="userInterceptor" class="com.crm_ssh_web.web.action.interceptor.UserInterceptor"/>
+		</interceptors>
+		<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+		
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="loginOk">/index.jsp</result>
+			<result name="initResetPwdUI">/reset.jsp</result>
+			<interceptor-ref name="userInterceptor">
+				<param name="excludeMethods">
+					login,regist,checkCode
+				</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		
+		<action name="customer_*" class="customerAction" method="{1}">
+			<result name="addCustomer">/jsp/customer/add.jsp</result>
+			<result name="saveCustomer" type="redirectAction">customer_findByPage.action</result>
+			<result name="listCustomer">/jsp/customer/list.jsp</result>
+			<result name="initEdit">/jsp/customer/edit.jsp</result>
+			<result name="editCustomer" type="redirectAction">customer_findByPage.action</result>
+			<result name="deleteCustomer" type="redirectAction">customer_findByPage.action</result>
+			<interceptor-ref name="userInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<!-- 决定文件上传的类型 -->
+			<param name="fileUpload.allowedExtensions">.jpg,.txt,.png</param>
+		</action>
+		
+		<action name="dict_*" class="dictAction" method="{1}">
+			<interceptor-ref name="userInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		
+		<action name="linkman_*" class="linkmanAction" method="{1}">
+			<result name="addLinkmanUI">/jsp/linkman/add.jsp</result>
+			<result name="listLinkman">/jsp/linkman/list.jsp</result>
+			<result name="addLinkman" type="redirectAction">linkman_findByPage.action</result>
+			<result name="updateLinkmanUI">/jsp/linkman/edit.jsp</result>
+			<result name="updateLinkman" type="redirectAction">linkman_findByPage.action</result>
+			<result name="deleteLinkman" type="redirectAction">linkman_findByPage.action</result>
+			<interceptor-ref name="userInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		
+		<action name="visit_*" class="visitAction" method="{1}">
+			<result name="addVisitUI">/jsp/visit/add.jsp</result>
+			<result name="listVisit">/jsp/visit/list.jsp</result>
+			<result name="addVisit" type="redirectAction">visit_findByPage.action</result>
+			<interceptor-ref name="userInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		
+		<action name="total_*" class="totalsAction" method="{1}">
+			<result name="findVocations">/jsp/totals/vocations.jsp</result>
+			<result name="findSources">/jsp/totals/sources.jsp</result>
+			<interceptor-ref name="userInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+	</package>
+</struts>

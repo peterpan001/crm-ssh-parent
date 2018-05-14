@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"       
+	xmlns:p="http://www.springframework.org/schema/p"  
+	xmlns:context="http://www.springframework.org/schema/context"   
+	xmlns:tx="http://www.springframework.org/schema/tx"  
+	xmlns:aop="http://www.springframework.org/schema/aop"  
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+	http://www.springframework.org/schema/beans/spring-beans.xsd    
+	http://www.springframework.org/schema/aop    
+	http://www.springframework.org/schema/aop/spring-aop.xsd    
+	http://www.springframework.org/schema/tx    
+	http://www.springframework.org/schema/tx/spring-tx.xsd    
+	http://www.springframework.org/schema/context    
+	http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- userAction -->
+	<bean id="userAction" class="com.crm_ssh_web.web.action.UserAction" scope="prototype">
+		<property name="userService" ref="userService"/>
+	</bean>
+	
+	<!-- customerAction -->
+	<bean id="customerAction" class="com.crm_ssh_web.web.action.CustomerAction" scope="prototype">
+		<property name="customerService" ref="customerService"/>
+	</bean>
+	
+	<!-- DictAction -->
+	<bean id="dictAction" class="com.crm_ssh_web.web.action.DictAction" scope="prototype">
+		<property name="dictService" ref="dictService"/>
+	</bean>
+	
+	<!-- LinkmanAction -->
+	<bean id="linkmanAction" class="com.crm_ssh_web.web.action.LinkmanAction" scope="prototype">
+		<property name="linkmanService" ref="linkmanService"/>
+	</bean>
+	
+	<!-- 拜访客户和统计模块注解扫描 -->
+	<context:component-scan base-package="com.crm_ssh_web.web.action"/>
+	<!-- VisitAction -->
+	<!-- 
+	<bean id="visitAction" class="com.crm_ssh_web.web.action.VisitAction" scope="prototype">
+		<property name="visitService" ref="visitService"/>
+	</bean> 
+	-->
+	
+	<!-- TotalsAction -->
+	<!-- 
+	<bean id="totalsAction" class="com.crm_ssh_web.web.action.TotalsAction" scope="prototype">
+		<property name="totalsService" ref="totalsService"/>
+	</bean> 
+	-->
+	
+</beans>
